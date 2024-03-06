@@ -14,27 +14,28 @@ class ContinueCoroutineWhenUserLeavesScreenViewModel(
 
     fun loadData() {
         uiState.value = UiState.Loading.LoadFromDb
-
         viewModelScope.launch {
-            val localVersions = repository.getLocalAndroidVersions()
-            if (localVersions.isNotEmpty()) {
-                uiState.value =
-                    UiState.Success(DataSource.Database, localVersions)
-            } else {
-                uiState.value =
-                    UiState.Error(DataSource.Database, "Database empty!")
-            }
+           try {
+               val localVersions = repository.getLocalAndroidVersions()
+               if(localVersions.isEmpty()){
+                   uiState.value = UiState.Error(DataSource.Database,"Database empty!")
+               }else{
+                   uiState.value = UiState.Success(DataSource.Database,localVersions)
+               }
+
+           } catch (e: Exception) {
+               uiState.value = UiState.Error(DataSource.Database,"Database Request Failed")
+           }
 
             uiState.value = UiState.Loading.LoadFromNetwork
-
             try {
-                uiState.value = UiState.Success(
-                    DataSource.Network,
-                    repository.loadAndStoreRemoteAndroidVersions()
-                )
-            } catch (exception: Exception) {
-                uiState.value = UiState.Error(DataSource.Network, "Network Request failed")
+                val loadFromNetwork = repository.loadAndStoreRemoteAndroidVersions()
+               // val loadFromNetwork = repository.loadAndStoreRemoteAndroidVersionsWithViewModelScope()
+                uiState.value = UiState.Success(DataSource.Network,loadFromNetwork)
+            } catch (e: Exception) {
+                uiState.value = UiState.Error(DataSource.Network,"Network Request Failed")
             }
+
         }
     }
 

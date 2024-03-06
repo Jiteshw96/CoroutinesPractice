@@ -10,4 +10,5 @@ class ViewModelFactory(private val repository: AndroidVersionRepository?) :
         return modelClass.getConstructor(AndroidVersionRepository::class.java)
             .newInstance(repository)
     }
+
 }
