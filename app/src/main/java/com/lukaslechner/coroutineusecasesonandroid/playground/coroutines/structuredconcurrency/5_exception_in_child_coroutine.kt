@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -17,7 +18,6 @@ fun main() = runBlocking{
     }
 
     val scope = CoroutineScope(Job() +Dispatchers.Default)
-
 
     scope.launch(ceh) {
         println("Coroutine 1 starts")

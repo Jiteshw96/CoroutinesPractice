@@ -17,7 +17,7 @@ suspend fun main()  {
     val scope = CoroutineScope(Job() + exceptionHandler)
 
     //#1
-   /*val job = scope.launch(exceptionHandler) {
+   val job = scope.launch(exceptionHandler) {
         try {
             async {
                 delay(1000)
@@ -26,10 +26,10 @@ suspend fun main()  {
         }catch (exception:Exception){
             println("Exception caught in launch try catch")
         }
-    }*/
+    }
 
     //#2
-   val job =  scope.async() {
+  /* val job =  scope.async() {
         try {
             async {
                 delay(1000)
@@ -40,7 +40,7 @@ suspend fun main()  {
         }
     }
 
-    /*scope.launch(exceptionHandler) {
+    scope.launch(exceptionHandler) {
         job.await()
         println("isActive ${job.isCancelled}");
     }*/

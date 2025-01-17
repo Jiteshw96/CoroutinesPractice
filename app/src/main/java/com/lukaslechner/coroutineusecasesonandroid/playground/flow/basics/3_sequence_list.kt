@@ -17,7 +17,9 @@ private fun calculateFactorial(number: Int) : Sequence<BigInteger> = sequence {
     var factorial = BigInteger.ONE
     for(i in 1..number){
         Thread.sleep(10)
+        println("processing next calculation")
         factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
         yield(factorial)
     }
+    println("finished calculation")
 }

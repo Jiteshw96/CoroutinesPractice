@@ -23,7 +23,7 @@ suspend fun main()  {
     val scope = CoroutineScope(Job())
 
     //#1
-    /*scope.launch {
+    scope.launch {
         try {
             async {
                 delay(100)
@@ -32,7 +32,7 @@ suspend fun main()  {
         }catch (exception:Exception){
             println("exception caught in try catch $exception")
         }
-    }*/
+    }
 
     //#2
     /*scope.launch(exceptionHandler) {

@@ -1,10 +1,15 @@
 package com.lukaslechner.coroutineusecasesonandroid.playground.coroutines.coroutinefundamentals
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
+/***
+ * Thread working on Main but not blocking it
+ * */
 fun main() = runBlocking {
     println("main starts working")
     joinAll(

@@ -17,7 +17,9 @@ fun main() = runBlocking{
         result
     }
 
-    val resultList = listOf(deferred1.await(),deferred2.await())
+
+
+    val resultList = listOf(deferred2.join())
     println(resultList)
 }
 

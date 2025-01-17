@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import java.math.BigInteger
@@ -14,8 +15,13 @@ import kotlin.coroutines.EmptyCoroutineContext
 suspend fun main(){
     val scope = CoroutineScope(EmptyCoroutineContext)
 
+    /** everything in the core coroutines library checks for cancellation automatically,
+    but if you are doing something that emits values and nowhere in the Flow’s chain do any methods from
+    the core coroutines get called,
+    cancellable operator will step in an check for cancellation so you don’t have to manually.*/
+
     scope.launch {
-        initFlow()
+        flowOf(1,2,3)
             .onCompletion { throwable->
                 if(throwable is CancellationException){
                     println("Coroutine is cancelled")
@@ -29,22 +35,6 @@ suspend fun main(){
                 }
             }
     }.join()
-}
 
-private fun initFlow() = flow {
-    emit(1)
-    emit(2)
-    println("Start calculation")
-    calculateFactorial(1_000)
-    println("Calculation finished")
-    emit(3)
-}
 
-private fun calculateFactorial(number : Int) : BigInteger {
-    var factorial = BigInteger.ONE
-    for(i in 1..number){
-        println("Calculating for $i")
-        factorial = factorial.multiply(BigInteger.valueOf(i.toLong()))
-    }
-    return factorial
 }

@@ -12,8 +12,8 @@ fun main(){
 
 fun threadRoutine(number:Int,delay:Long){
         thread {
-            println("Routine $number starts work")
+            println("Routine $number starts work ${Thread.currentThread().name}")
             Thread.sleep(delay)
-            println("Routine $number has finished")
+            println("Routine $number has finished ${Thread.currentThread().name}")
         }
 }

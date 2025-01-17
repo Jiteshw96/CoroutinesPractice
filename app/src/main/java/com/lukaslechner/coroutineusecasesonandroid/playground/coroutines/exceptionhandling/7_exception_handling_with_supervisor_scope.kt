@@ -62,14 +62,14 @@ fun main() = runBlocking {
            println("Result 1: $result1")
            println("Result 2: $result2")
            println("Result 3: $result3")
-       }
+      }
    }
    Thread.sleep(10000)
 
 
 
     //Example 2
-    scope.launch(ceh) {
+    /*scope.launch(ceh) {
         supervisorScope {
             try {
                 awaitAll(
@@ -100,5 +100,5 @@ fun main() = runBlocking {
         }
     }
 
-    Thread.sleep(10000)
+    Thread.sleep(10000) */
 }

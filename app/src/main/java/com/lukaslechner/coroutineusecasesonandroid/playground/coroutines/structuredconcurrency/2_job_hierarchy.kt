@@ -22,5 +22,6 @@ fun main(){
 
     println("passedJob and coroutineJob are references to the same job object: ${passedJob === coroutineJob}")
 
-    println("Is coroutineJob a child of scopeJob? =>${scopeJob.children.contains(coroutineJob)}")
+    println("Is coroutineJob a child of scopeJob? =>${scopeJob.children.contains(passedJob)}")
+    println("Is coroutineJob a child of passedJob? =>${passedJob.children.contains(coroutineJob)}")
 }

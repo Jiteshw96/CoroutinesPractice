@@ -14,7 +14,7 @@ fun main() = runBlocking {
 }
 
 suspend fun threadSwitchingCoroutine(number:Int,delay: Long){
-    print("$number starts working on ${Thread.currentThread().name}")
+    println("$number starts working on ${Thread.currentThread().name}")
     delay(delay)
     withContext(Dispatchers.Default){
         println("$number ends working on ${Thread.currentThread().name}")
